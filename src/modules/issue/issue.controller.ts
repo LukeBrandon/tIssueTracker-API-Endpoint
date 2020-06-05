@@ -1,12 +1,22 @@
-import { Controller, Get, Post, Req, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Req, Param, Delete, Put } from '@nestjs/common';
 import { IssueService } from './issue.service';
 import { Issue } from './issue.schema';
 import { CreateIssueRequest } from './dto/create-issue.dto';
 import { Request } from 'express';
+import { UpdateIssueStatusRequest } from './dto/update-issue-status.dt';
 
 @Controller('issue')
 export class IssueController {
     constructor(private readonly issueService: IssueService) {}
+
+    @Post('new')
+    async createIssue(@Req() request: Request) {
+        const createIssueRequest: CreateIssueRequest = request.body;
+
+        console.log(createIssueRequest);
+
+        await this.issueService.create(createIssueRequest);
+    }
 
     @Get('one/:id')
     async getIssueById(@Param('id') id): Promise<Issue> {
@@ -24,12 +34,11 @@ export class IssueController {
         return await this.issueService.deleteById(id);
     }
 
-    @Post('new')
-    async createIssue(@Req() request: Request) {
-        const createIssueRequest: CreateIssueRequest = request.body;
+    @Put('update/status')
+    async updateIssueById(@Req() req: Request) {
+        const updateIssueRequest: UpdateIssueStatusRequest = req.body;
+        console.log("Updating issue " + updateIssueRequest._id);
 
-        console.log(createIssueRequest);
-
-        await this.issueService.create(createIssueRequest);
+        return await this.issueService.updateStatus(updateIssueRequest._id, updateIssueRequest.newStatus);
     }
 }

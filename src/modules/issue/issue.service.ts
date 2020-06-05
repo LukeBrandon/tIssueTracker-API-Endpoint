@@ -36,4 +36,14 @@ export class IssueService {
     async deleteById(id: string){
         return this.issueModel.deleteOne({_id: id});
     }
+
+    async updateStatus(id: string, newStatus: string){
+        return this.issueModel.findOneAndUpdate({_id: id}, {$set:{status: newStatus}}, function(err, doc) {
+            if(err){
+                throw Error(err)
+            }
+
+            console.log(doc);
+       });
+    }
 }
