@@ -24,8 +24,8 @@ export class BoardService {
         });
     }
 
-    async update(){
-
+    async update(id: string, newTitle: string) {
+        return this.boardModel.findOneAndUpdate({_id: id}, {$set: {title: newTitle}});
     }
 
     async delete(){
