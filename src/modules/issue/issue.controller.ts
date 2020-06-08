@@ -1,9 +1,8 @@
 import { Controller, Get, Post, Req, Param, Delete, Put } from '@nestjs/common';
 import { IssueService } from './issue.service';
 import { Issue } from './issue.schema';
-import { CreateIssueRequest } from './dto/create-issue.dto';
+import { CreateIssueRequest, UpdateIssueStatusRequest } from './dto/issue-requests.dto';
 import { Request } from 'express';
-import { UpdateIssueStatusRequest } from './dto/update-issue-status.dt';
 
 @Controller('issue')
 export class IssueController {

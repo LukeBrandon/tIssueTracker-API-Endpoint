@@ -1,9 +1,8 @@
 import { Controller, Param, Get, Post, Req, Put } from '@nestjs/common';
 import { Request } from 'express';
 import { BoardService } from './board.service';
-import { CreateBoardRequest } from './dto/create-board.dto';
+import { CreateBoardRequest, UpdateBoardTitleRequest } from './dto/board-requests.dto';
 import { Board } from './board.schema';
-import { UpdateBoardTitleRequest } from './dto/update-board-title.dto';
 
 @Controller('board')
 export class BoardController {

@@ -6,3 +6,8 @@ export interface CreateIssueRequest {
     userId: string;
     boardId: string;
   }
+
+  export interface UpdateIssueStatusRequest {
+    _id: string;
+    newStatus: string;
+  }

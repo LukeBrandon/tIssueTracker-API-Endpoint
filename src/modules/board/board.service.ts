@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Board } from './board.schema';
-import { CreateBoardRequest } from './dto/create-board.dto';
+import { CreateBoardRequest } from './dto/board-requests.dto';
 
 @Injectable()
 export class BoardService {
