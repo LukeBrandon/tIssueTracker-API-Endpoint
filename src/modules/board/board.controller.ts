@@ -27,9 +27,7 @@ export class BoardController {
         console.log(updateBoardRequest);
         console.log(`Updating board with id ${updateBoardRequest._id} to new title: ${updateBoardRequest.newTitle}`);
 
-        const message = await this.boardService.update(updateBoardRequest._id, updateBoardRequest.newTitle);
-
-        return message;
+        return await this.boardService.update(updateBoardRequest._id, updateBoardRequest.newTitle);
     }
 
     @Post('new')

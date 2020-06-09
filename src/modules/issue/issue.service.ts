@@ -44,6 +44,7 @@ export class IssueService {
             }
 
             console.log(doc);
+            return "updated successfully";
        });
     }
 }
