@@ -24,7 +24,6 @@ export class BoardController {
     async updateBoardTitleById(@Req() request: Request) {
         const updateBoardRequest: UpdateBoardTitleRequest = request.body;
 
-        console.log(updateBoardRequest);
         console.log(`Updating board with id ${updateBoardRequest._id} to new title: ${updateBoardRequest.newTitle}`);
 
         return await this.boardService.update(updateBoardRequest._id, updateBoardRequest.newTitle);
