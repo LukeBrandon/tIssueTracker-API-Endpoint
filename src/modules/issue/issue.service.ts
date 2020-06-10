@@ -20,7 +20,7 @@ export class IssueService {
                 return;
             }
             console.log(doc);
-            console.log('Issue created successfully');
+            return 'Issue created successfully';
         });
     }
 

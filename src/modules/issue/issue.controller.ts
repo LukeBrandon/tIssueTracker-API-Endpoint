@@ -14,7 +14,7 @@ export class IssueController {
 
         console.log(createIssueRequest);
 
-        await this.issueService.create(createIssueRequest);
+        return await this.issueService.create(createIssueRequest);
     }
 
     @Get('one/:id')
