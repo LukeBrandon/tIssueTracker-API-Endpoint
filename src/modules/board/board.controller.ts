@@ -1,7 +1,7 @@
 import { Controller, Param, Get, Post, Req, Put } from '@nestjs/common';
 import { Request } from 'express';
 import { BoardService } from './board.service';
-import { CreateBoardRequest, UpdateBoardTitleRequest } from './dto/board-requests.dto';
+import { CreateBoardRequest, UpdateBoardTitleRequest, CreateBoardResponse } from './dto/board-requests.dto';
 import { Board } from './board.schema';
 
 @Controller('board')
@@ -30,11 +30,11 @@ export class BoardController {
     }
 
     @Post('new')
-    async createBoard(@Req() request: Request) {
+    async createBoard(@Req() request: Request): Promise<CreateBoardResponse> {
         const createBoardRequest: CreateBoardRequest = request.body;
 
         console.log(createBoardRequest);
 
-        await this.boardService.create(createBoardRequest);
+        return await this.boardService.create(createBoardRequest);
     }
 }

@@ -8,3 +8,8 @@ export interface UpdateBoardTitleRequest {
   _id: string;
   newTitle: string;
 }
+
+export interface CreateBoardResponse {
+  success: boolean;
+  message: string;
+}

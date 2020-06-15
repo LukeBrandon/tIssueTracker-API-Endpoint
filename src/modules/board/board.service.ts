@@ -2,19 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Board } from './board.schema';
-import { CreateBoardRequest } from './dto/board-requests.dto';
+import { CreateBoardRequest, CreateBoardResponse } from './dto/board-requests.dto';
 
 @Injectable()
 export class BoardService {
     constructor(@InjectModel(Board.name) private boardModel: Model<Board>) {}
 
-    async create(createBoardRequest: CreateBoardRequest): Promise<Board>{
-        // Generates object according to the schema to go into MongoDB
-        // Automatically generates an ID for the id property
+    async create(createBoardRequest: CreateBoardRequest): Promise<CreateBoardResponse>{
         const createdBoard: Board = new this.boardModel(createBoardRequest);
 
         console.log(createdBoard);
-        return createdBoard.save((err, doc) => {
+        createdBoard.save((err, doc) => {
             if(err){
                 console.error(err);
                 return;
@@ -22,6 +20,11 @@ export class BoardService {
             console.log(doc);
             console.log('Board inserted successfully');
         });
+
+        return {
+            success: true,
+            message: "Board created successfully"
+        }
     }
 
     async update(id: string, newTitle: string) {
