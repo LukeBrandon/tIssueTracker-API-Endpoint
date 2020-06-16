@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Board } from './board.schema';
-import { CreateBoardRequest, CreateBoardResponse } from './dto/board-requests.dto';
+import { CreateBoardRequest, SimpleResponse } from './dto/board-requests.dto';
 
 @Injectable()
 export class BoardService {
     constructor(@InjectModel(Board.name) private boardModel: Model<Board>) {}
 
-    async create(createBoardRequest: CreateBoardRequest): Promise<CreateBoardResponse>{
+    async create(createBoardRequest: CreateBoardRequest): Promise<SimpleResponse>{
         const createdBoard: Board = new this.boardModel(createBoardRequest);
 
         console.log(createdBoard);
@@ -20,7 +20,7 @@ export class BoardService {
             console.log(doc);
             console.log('Board inserted successfully');
         });
-
+        
         return {
             success: true,
             message: "Board created successfully"
@@ -38,8 +38,18 @@ export class BoardService {
         });
     }
 
-    async delete(){
-
+    async delete(id: string): Promise<SimpleResponse> {
+        const yes = await this.boardModel.findByIdAndDelete(id);
+        if(yes)
+            return {
+                success: true,
+                message: "Board deleted successfully"
+            }
+        else
+            return {
+                success: false,
+                message: "There was a problme deleting your board"
+            }
     }
 
     async getById(id: string): Promise<Board>{

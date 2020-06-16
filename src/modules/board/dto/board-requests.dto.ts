@@ -9,7 +9,7 @@ export interface UpdateBoardTitleRequest {
   newTitle: string;
 }
 
-export interface CreateBoardResponse {
+export interface SimpleResponse {
   success: boolean;
   message: string;
 }
